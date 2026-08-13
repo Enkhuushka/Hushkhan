@@ -1,5 +1,34 @@
-/* Hide the static headers baked into each injected HTML page;
-   the shared React Header component replaces them on every page. */
-body .header {
-  display: none !important;
+/* Global header layout fixes */
+
+@media (min-width: 1024px) {
+  body .header .header-inner {
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+
+  body .header .nav-links,
+  body .header .nav-left,
+  body .header .nav-right {
+    flex-wrap: nowrap !important;
+    gap: 18px !important;
+  }
+
+  body .header .nav-links a,
+  body .header .nav-left a,
+  body .header .nav-right a {
+    white-space: nowrap !important;
+    font-size: 12px !important;
+    letter-spacing: 0.2px !important;
+    line-height: 1.2 !important;
+  }
+
+  body .header .lang-switch {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  body .header .icon-btn,
+  body .header .cart-toggle {
+    flex-shrink: 0;
+  }
 }
