@@ -34,28 +34,6 @@
   color: var(--kernel); text-decoration: none; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--resin); }
-.nav-links .roll-link {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  line-height: 1.25;
-}
-.nav-links .roll-link span {
-  display: block;
-  transition: transform 0.3s ease;
-}
-.nav-links .roll-link::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  display: block;
-  transition: transform 0.3s ease;
-  color: var(--resin);
-}
-.nav-links .roll-link:hover span { transform: translateY(-100%); }
-.nav-links .roll-link:hover::after { transform: translateY(-100%); }
 .header-right { display: flex; align-items: center; gap: 20px; }
 .lang-bar {
   display: inline-flex; align-items: center;

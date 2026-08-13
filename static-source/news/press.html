@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хэвлэлийн мэдээ — HushKhan.mn</title>
+  <meta name="description" content="HushKhan хэвлэлд гарсан нийтлэлүүд, мэдээ.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shop/shop-shared.css">
+  <link rel="stylesheet" href="/news/news-components.css">
+</head>
+<body class="header-over-dark">
+<header class="header">
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <svg class="logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-3.5 4-5.5 8-5.5 12a5.5 5.5 0 0 0 11 0C17.5 10 15.5 6 12 2Z"/><path d="M12 6v12"/><path d="M8.5 10h7"/><path d="M8 14h8"/><path d="M9 18h6"/></svg>
+            HushKhan
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/shop">Бүтээгдэхүүн</a></li>
+                <li><a href="/about">Бидний тухай</a></li>
+                <li><a href="/sustainability">Тогтвортой хөгжил</a></li>
+                <li><a href="/partnership">Хамтын ажиллагаа</a></li>
+                <li><a href="/certificates.html">Чанарын баталгаа</a></li>
+                <li><a href="/news">Мэдээ</a></li>
+                <li><a href="/careers">Ажлын байр</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="lang-bar">
+                <a href="/" class="active">MN</a>
+                <a href="#">EN</a>
+                <a href="#">中文</a>
+                <a href="#">RU</a>
+                <a href="#">KR</a>
+            </div>
+            <button class="icon-btn cart-toggle" id="cartToggle" aria-label="Cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+            <button class="icon-btn menu-btn" aria-label="Menu" id="menuBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-drawer-header">
+        <h2>Таны сагс <span id="cartHeaderCount">(0)</span></h2>
+        <button class="cart-close" id="cartClose" aria-label="Хаах">&times;</button>
+    </div>
+    <div class="cart-drawer-body">
+        <div class="cart-upsell">
+            <p class="cart-upsell-title">Үнэгүй бэлэг аваарай</p>
+            <div class="cart-upsell-product">
+                <img src="/assets/products/oil.jpg" alt="Самрын тос жижиг">
+                <div>
+                    <h4>Самрын тос жижиг лонх</h4>
+                    <p>Үнэгүй <s>25,000₮</s></p>
+                </div>
+                <button class="btn-add-cart-sm" data-upsell="oil-small">Нэмэх</button>
+            </div>
+        </div>
+        <div class="cart-items" id="cartItems"><div class="cart-empty">Сагс хоосон байна.</div></div>
+        <div class="cart-upsell">
+            <p class="cart-upsell-title">Нууц бэлэг багц</p>
+            <div class="cart-upsell-product">
+                <img src="/assets/products/gift.jpg" alt="Нууц багц">
+                <div>
+                    <h4>HushKhan Mystery Bag</h4>
+                    <p>Зөвхөн 35,000₮ <s>50,000₮</s></p>
+                </div>
+                <button class="btn-add-cart-sm" data-upsell="mystery">Нэмэх</button>
+            </div>
+        </div>
+        <div class="cart-also-bought">
+            <p class="cart-upsell-title">Үүнтэй хамт авдаг</p>
+            <div class="also-bought-list">
+                <div class="also-bought-item"><img src="/assets/products/chocolate.jpg" alt="Самрын шоколад"><p>Самрын шоколад</p><button data-upsell="chocolate">Нэмэх</button></div>
+                <div class="also-bought-item"><img src="/assets/products/honey.jpg" alt="Балтай самар"><p>Зөгийн балтай самар</p><button data-upsell="honey">Нэмэх</button></div>
+                <div class="also-bought-item"><img src="/assets/products/raw.jpg" alt="Цэвэр самар"><p>Цэвэр самар</p><button data-upsell="raw">Нэмэх</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-drawer-footer">
+        <div class="cart-guarantee">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Мөнгө буцаах баталгаа
+        </div>
+        <button class="btn-checkout" id="checkoutBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            ТӨЛБӨР ТӨЛӨХ · <span id="cartTotal">0₮</span> <s id="cartOriginalTotal">0₮</s>
+        </button>
+    </div>
+</aside>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="/shop">Бүтээгдэхүүн</a>
+    <a href="/about">Бидний тухай</a>
+    <a href="/sustainability">Тогтвортой хөгжил</a>
+    <a href="/partnership">Хамтын ажиллагаа</a>
+        <a href="/certificates.html">Чанарын баталгаа</a>
+    <a href="/news">Мэдээ</a>
+    <a href="/careers">Ажлын байр</a>
+    <a href="/careers/contact">Холбоо барих</a>
+</div>
+
+<section class="page-hero">
+        <img src="../assets/blog-5.jpg" alt="Хэвлэлийн мэдээ" class="page-hero-bg">
+        <div class="page-hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-eyebrow">Мэдээ</div>
+            <h1 class="display">Хэвлэлийн мэдээ</h1>
+            
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Медиа</div>
+                <h2 class="section-title display">Хэвлэлд гарсан нийтлэлүүд</h2>
+                <p class="section-subtitle">Хэвлэл мэдээллийн хэрэгсэл, онлайн сэтгүүлд гарсан HushKhan-ийн талаарх нийтлэлүүд.</p>
+            </div>
+            
+            <div class="press-list">
+                <a href="#" class="press-item">
+                    <div>
+                        <span class="press-source">Mongolian Business Review</span>
+                        <h3 class="display">Монголын хушны самар Солонгосын дэлгүүрүүдэд</h3>
+                        <p>HushKhan брэнд Солонгосын 20+ органик дэлгүүрт нийлүүлж эхэллээ.</p>
+                    </div>
+                    <div class="press-date"><span>05</span>2026.07</div>
+                </a>
+                <a href="#" class="press-item">
+                    <div>
+                        <span class="press-source">Enterprise Mongolia</span>
+                        <h3 class="display">HushKhan шинэ үйлдвэрээ нээв</h3>
+                        <p>ISO 22000 стандартад нийцсэн шинэ үйлдвэр жилд 500 тонн бүтээгдэхүүн гаргах хүчин чадалтай.</p>
+                    </div>
+                    <div class="press-date"><span>18</span>2026.04</div>
+                </a>
+                <a href="#" class="press-item">
+                    <div>
+                        <span class="press-source">Eco News</span>
+                        <h3 class="display">Мод тарих хөтөлбөрт 1000+ идэвхтэн нэгдлээ</h3>
+                        <p>Иргэд, компаниудыг хамруулсан ойн нөхөн сэргээлтийн аянд оролцогчид нэмэгдсээр байна.</p>
+                    </div>
+                    <div class="press-date"><span>08</span>2026.03</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="media-kit-cta">
+        <div class="container">
+            <h2 class="display">Media kit татах</h2>
+            <p>Хэвлэл мэдээллийнхэнд зориулсан брэндийн материалыг бүтнээр нь татна уу.</p>
+            <a href="/news/media-kit" class="btn btn-orange">Media kit руу очих</a>
+        </div>
+    </section>
+
+        <footer id="footerV2" class="footer footer-v2">
+    <div class="footer-v2-inner">
+        <div class="footer-v2-grid">
+            <div class="footer-v2-col">
+                <h4>Дэлгүүр</h4>
+                <a href="/shop">Бүтээгдэхүүн</a>
+                <a href="/shop/products/roasted">Шарсан самар</a>
+                <a href="/shop/products/raw">Цэвэр самар</a>
+                <a href="/shop/products/honey">Балтай самар</a>
+                <a href="/shop/products/oil">Самрын тос</a>
+            </div>
+            <div class="footer-v2-col">
+                <h4>Компани</h4>
+                <a href="/about">Бидний тухай</a>
+                <a href="/about/timeline">Түүх</a>
+                <a href="/sustainability">Тогтвортой хөгжил</a>
+                <a href="/careers">Ажлын байр</a>
+            </div>
+            <div class="footer-v2-col">
+                <h4>Тусламж</h4>
+                <a href="/shop/locations">Хүргэлт / Байршил</a>
+                <a href="#">Буцаалт</a>
+                <a href="#">Нууцлал</a>
+                <a href="#">Үйлчилгээний нөхцөл</a>
+            </div>
+            <div class="footer-v2-col footer-v2-sub">
+                <h4>Мэдээлэл авах</h4>
+                <p>Шинэ бүтээгдэхүүн, хямдралын мэдээлэл аваарай.</p>
+                <form class="footer-v2-form" onsubmit="event.preventDefault(); this.reset(); alert('Бүртгэл амжилттай!');">
+                    <input type="email" placeholder="И-мэйл хаяг" required aria-label="И-мэйл хаяг">
+                    <button type="submit">Бүртгүүлэх</button>
+                </form>
+                <label class="footer-v2-check">
+                    <input type="checkbox">
+                    <span>Би HushKhan-аас мэдээлэл авахыг зөвшөөрч байна.</span>
+                </label>
+            </div>
+            <div class="footer-v2-col">
+                <h4>Үйлчилгээ</h4>
+                <a href="/partnership">Бөөний худалдаа</a>
+                <a href="/partnership">Хамтын ажиллагаа</a>
+        <a href="/certificates.html">Чанарын баталгаа</a>
+                <a href="/careers">Ажлын байр</a>
+            </div>
+            <div class="footer-v2-col">
+                <h4>Холбоо барих</h4>
+                <a href="/careers/contact">Холбогдох</a>
+                <a href="#">Түгээмэл асуулт</a>
+                <a href="#">Тусламж</a>
+            </div>
+            <div class="footer-v2-col">
+                <h4>Сошиал</h4>
+                <a href="#" aria-label="Instagram">Instagram</a>
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="TikTok">TikTok</a>
+            </div>
+            <div class="footer-v2-col">
+                <h4>Хүлээн авах</h4>
+                <div class="footer-v2-pay">
+                    <span class="pay-chip">VISA</span>
+                    <span class="pay-chip">Mastercard</span>
+                    <span class="pay-chip">Amex</span>
+                    <span class="pay-chip">PayPal</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-v2-brand">
+            <span class="brand-big">HushKhan</span>
+            <span class="brand-sep">|</span>
+            <span class="brand-big">2018</span>
+        </div>
+
+        <div class="footer-v2-bottom">
+            <div class="footer-v2-bottom-left">Exclusive Offers</div>
+            <div class="footer-v2-bottom-center">© 2026 HUSHKHAN MONGOLIA</div>
+            <div class="footer-v2-bottom-right">HushKhan is a Mongolian premium pine-nut brand.</div>
+        </div>
+    </div>
+</footer>
+<script src="/shop/shop-shared.js"></script>
+
+</body>
+</html>

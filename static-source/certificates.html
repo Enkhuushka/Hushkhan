@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Чанарын баталгаа, сертификатууд — HushKhan.mn</title>
+  <meta name="description" content="HushKhan-ийн олон улсын стандарт, сертификатууд, чанарын баталгаа.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shop/shop-shared.css">
+  <style>
+    :root {
+      --cert-bg: #ffffff;
+      --cert-text: #14231B;
+      --cert-muted: #6b7a6f;
+      --cert-line: #e0e4e2;
+      --cert-red: #E53935;
+      --cert-card-border: #e8ecea;
+    }
+    body.cert-page { background: var(--cert-bg); color: var(--cert-text); }
+    body.cert-page .header,
+    body.cert-page .header a,
+    body.cert-page .logo,
+    body.cert-page .icon-btn { color: var(--kernel); }
+    body.cert-page .lang-bar a.active { color: var(--forest); }
+    .cert-section { padding: 120px 0 100px; background: var(--cert-bg); min-height: 100vh; }
+    .cert-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .cert-title {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 600;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--cert-text);
+      margin-bottom: 60px;
+    }
+
+    /* Timeline */
+    .cert-timeline {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto 70px;
+    }
+    .cert-timeline-line {
+      position: absolute;
+      top: 22px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--cert-line);
+      z-index: 0;
+    }
+    .cert-timeline-items {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 1;
+    }
+    .cert-year-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      background: var(--cert-bg);
+      padding: 0 10px;
+    }
+    .cert-year {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid var(--cert-line);
+      background: var(--cert-bg);
+      color: var(--cert-muted);
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .cert-year:hover { border-color: var(--cert-red); color: var(--cert-red); }
+    .cert-year.active {
+      border-color: var(--cert-red);
+      background: var(--cert-red);
+      color: #fff;
+    }
+    .cert-year .check {
+      position: absolute;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.25s ease;
+    }
+    .cert-year.active .check { opacity: 1; transform: scale(1); }
+    .cert-year.active .year-num { opacity: 0; }
+    .cert-year-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cert-muted);
+      white-space: nowrap;
+      transition: color 0.25s;
+    }
+    .cert-year-wrap.active .cert-year-label { color: var(--cert-red); }
+
+    /* Carousel */
+    .cert-carousel {
+      position: relative;
+      --item-width: 20%;
+      --active-index: 1;
+    }
+    .cert-carousel-viewport { overflow: hidden; padding: 40px 0; }
+    .cert-carousel-track {
+      display: flex;
+      transform: translateX(calc(50% - (var(--item-width) * (var(--active-index) + 0.5))));
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+    .cert-card-item {
+      flex: 0 0 var(--item-width);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: opacity 0.4s;
+    }
+    .cert-card {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 18px;
+      background: #fff;
+      border: 2px solid var(--cert-card-border);
+      box-shadow: 0 10px 30px rgba(20,35,27,0.07);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cert-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cert-card-meta { margin-top: 18px; text-align: center; transition: all 0.35s; }
+    .cert-card-title { font-size: 15px; font-weight: 700; color: var(--cert-text); margin-bottom: 4px; }
+    .cert-card-sub { font-size: 13px; color: var(--cert-muted); }
+
+    .cert-card-item.active .cert-card { transform: scale(1.08); border-color: var(--cert-red); box-shadow: 0 24px 60px rgba(20,35,27,0.14); }
+    .cert-card-item.near .cert-card { transform: scale(0.95); opacity: 0.7; }
+    .cert-card-item.far .cert-card { transform: scale(0.86); opacity: 0.45; }
+    .cert-card-item:not(.active) .cert-card-meta { opacity: 0.45; transform: translateY(8px); }
+
+    .cert-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--cert-line);
+      background: #fff;
+      color: var(--cert-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(20,35,27,0.06);
+    }
+    .cert-arrow:hover { background: #f5f7f6; border-color: var(--cert-red); color: var(--cert-red); }
+    .cert-arrow.prev { left: -24px; }
+    .cert-arrow.next { right: -24px; }
+    .cert-arrow:disabled { opacity: 0.35; cursor: default; }
+
+    @media (max-width: 1023px) {
+      .cert-carousel { --item-width: 28%; }
+      .cert-arrow.prev { left: 0; }
+      .cert-arrow.next { right: 0; }
+    }
+    @media (max-width: 767px) {
+      .cert-title { margin-bottom: 40px; }
+      .cert-timeline { margin-bottom: 40px; }
+      .cert-year-label { font-size: 11px; }
+      .cert-year { width: 38px; height: 38px; font-size: 11px; }
+      .cert-timeline-line { top: 18px; }
+      .cert-carousel { --item-width: 72%; }
+      .cert-card-item { padding: 12px; }
+      .cert-arrow { width: 40px; height: 40px; }
+    }
+  </style>
+</head>
+<body class="cert-page">
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <svg class="logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-3.5 4-5.5 8-5.5 12a5.5 5.5 0 0 0 11 0C17.5 10 15.5 6 12 2Z"/><path d="M12 6v12"/><path d="M8.5 10h7"/><path d="M8 14h8"/><path d="M9 18h6"/></svg>
+        HushKhan
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/shop">Бүтээгдэхүүн</a></li>
+          <li><a href="/about">Бидний тухай</a></li>
+          <li><a href="/sustainability">Тогтвортой хөгжил</a></li>
+          <li><a href="/partnership">Хамтын ажиллагаа</a></li>
+                <li><a href="/certificates.html">Чанарын баталгаа</a></li>
+          <li><a href="/news">Мэдээ</a></li>
+          <li><a href="/careers">Ажлын байр</a></li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <div class="lang-bar">
+          <a href="/" class="active">MN</a>
+          <a href="#">EN</a>
+          <a href="#">中文</a>
+          <a href="#">RU</a>
+          <a href="#">KR</a>
+        </div>
+        <button class="icon-btn cart-toggle" id="cartToggle" aria-label="Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn menu-btn" aria-label="Menu" id="menuBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-drawer-header">
+      <h2>Таны сагс <span id="cartHeaderCount">(0)</span></h2>
+      <button class="cart-close" id="cartClose" aria-label="Хаах">&times;</button>
+    </div>
+    <div class="cart-drawer-body">
+      <div class="cart-upsell">
+        <p class="cart-upsell-title">Үнэгүй бэлэг аваарай</p>
+        <div class="cart-upsell-product">
+          <img src="/assets/products/oil.jpg" alt="Самрын тос жижиг">
+          <div>
+            <h4>Самрын тос жижиг лонх</h4>
+            <p>Үнэгүй <s>25,000₮</s></p>
+          </div>
+          <button class="btn-add-cart-sm" data-upsell="oil-small">Нэмэх</button>
+        </div>
+      </div>
+      <div class="cart-items" id="cartItems"><div class="cart-empty">Сагс хоосон байна.</div></div>
+      <div class="cart-upsell">
+        <p class="cart-upsell-title">Нууц бэлэг багц</p>
+        <div class="cart-upsell-product">
+          <img src="/assets/products/gift.jpg" alt="Нууц багц">
+          <div>
+            <h4>HushKhan Mystery Bag</h4>
+            <p>Зөвхөн 35,000₮ <s>50,000₮</s></p>
+          </div>
+          <button class="btn-add-cart-sm" data-upsell="mystery">Нэмэх</button>
+        </div>
+      </div>
+      <div class="cart-also-bought">
+        <p class="cart-upsell-title">Үүнтэй хамт авдаг</p>
+        <div class="also-bought-list">
+          <div class="also-bought-item"><img src="/assets/products/chocolate.jpg" alt="Самрын шоколад"><p>Самрын шоколад</p><button data-upsell="chocolate">Нэмэх</button></div>
+          <div class="also-bought-item"><img src="/assets/products/honey.jpg" alt="Балтай самар"><p>Зөгийн балтай самар</p><button data-upsell="honey">Нэмэх</button></div>
+          <div class="also-bought-item"><img src="/assets/products/raw.jpg" alt="Цэвэр самар"><p>Цэвэр самар</p><button data-upsell="raw">Нэмэх</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-drawer-footer">
+      <div class="cart-guarantee">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Мөнгө буцаах баталгаа
+      </div>
+      <button class="btn-checkout" id="checkoutBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        ТӨЛБӨР ТӨЛӨХ · <span id="cartTotal">0₮</span> <s id="cartOriginalTotal">0₮</s>
+      </button>
+    </div>
+  </aside>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/shop">Бүтээгдэхүүн</a>
+    <a href="/about">Бидний тухай</a>
+    <a href="/sustainability">Тогтвортой хөгжил</a>
+    <a href="/partnership">Хамтын ажиллагаа</a>
+        <a href="/certificates.html">Чанарын баталгаа</a>
+    <a href="/news">Мэдээ</a>
+    <a href="/careers">Ажлын байр</a>
+    <a href="/careers/contact">Холбоо барих</a>
+  </div>
+
+  <section class="cert-section">
+    <div class="cert-container">
+      <h1 class="cert-title">Чанарын баталгаа, сертификатууд</h1>
+
+      <div class="cert-timeline">
+        <div class="cert-timeline-line"></div>
+        <div class="cert-timeline-items" id="timeline">
+          <div class="cert-year-wrap" data-index="0">
+            <button class="cert-year" aria-label="2015">
+              <span class="year-num">2015</span>
+              <svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <span class="cert-year-label">2015</span>
+          </div>
+          <div class="cert-year-wrap active" data-index="1">
+            <button class="cert-year active" aria-label="2018 ISO">
+              <span class="year-num">2018</span>
+              <svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <span class="cert-year-label">2018 - ISO</span>
+          </div>
+          <div class="cert-year-wrap" data-index="2">
+            <button class="cert-year" aria-label="2020">
+              <span class="year-num">2020</span>
+              <svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <span class="cert-year-label">2020</span>
+          </div>
+          <div class="cert-year-wrap" data-index="3">
+            <button class="cert-year" aria-label="2022">
+              <span class="year-num">2022</span>
+              <svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <span class="cert-year-label">2022</span>
+          </div>
+          <div class="cert-year-wrap" data-index="4">
+            <button class="cert-year" aria-label="2025">
+              <span class="year-num">2025</span>
+              <svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <span class="cert-year-label">2025</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-carousel" id="carousel">
+        <button class="cert-arrow prev" id="certPrev" aria-label="Өмнөх">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="cert-carousel-viewport">
+          <div class="cert-carousel-track" id="certTrack">
+            <div class="cert-card-item" data-index="0">
+              <div class="cert-card"><img src="https://placehold.co/420x560/eef2f0/4a5a50?text=HACCP+Certificate" alt="HACCP 2015"></div>
+              <div class="cert-card-meta">
+                <div class="cert-card-title">HACCP хүнсний аюулгүй байдал</div>
+                <div class="cert-card-sub">APU Dairy LLC · 2015</div>
+              </div>
+            </div>
+            <div class="cert-card-item" data-index="1">
+              <div class="cert-card"><img src="https://placehold.co/420x560/f5f7f6/4a5a50?text=ISO+9001:2015" alt="ISO 9001 2018"></div>
+              <div class="cert-card-meta">
+                <div class="cert-card-title">ISO 9001:2015</div>
+                <div class="cert-card-sub">Чанарын менежментийн систем</div>
+              </div>
+            </div>
+            <div class="cert-card-item" data-index="2">
+              <div class="cert-card"><img src="https://placehold.co/420x560/eef2f0/4a5a50?text=FSSC+22000+v6.0" alt="FSSC 22000 2020"></div>
+              <div class="cert-card-meta">
+                <div class="cert-card-title">FSSC 22000 v6.0</div>
+                <div class="cert-card-sub">Хүнсний аюулгүй байдлын систем</div>
+              </div>
+            </div>
+            <div class="cert-card-item" data-index="3">
+              <div class="cert-card"><img src="https://placehold.co/420x560/eef2f0/4a5a50?text=ISO+22000" alt="ISO 22000 2022"></div>
+              <div class="cert-card-meta">
+                <div class="cert-card-title">ISO 22000:2018</div>
+                <div class="cert-card-sub">Хүнсний аюулгүй байдлын менежмент</div>
+              </div>
+            </div>
+            <div class="cert-card-item" data-index="4">
+              <div class="cert-card"><img src="https://placehold.co/420x560/eef2f0/4a5a50?text=Organic+Certificate" alt="Organic 2025"></div>
+              <div class="cert-card-meta">
+                <div class="cert-card-title">Organic сертификат</div>
+                <div class="cert-card-sub">Байгалийн гаралтай бүтээгдэхүүн</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="cert-arrow next" id="certNext" aria-label="Дараах">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script src="/shop/shop-shared.js"></script>
+  <script>
+    (function() {
+      const carousel = document.getElementById('carousel');
+      const track = document.getElementById('certTrack');
+      const items = Array.from(track.children);
+      const yearWraps = Array.from(document.querySelectorAll('.cert-year-wrap'));
+      const prevBtn = document.getElementById('certPrev');
+      const nextBtn = document.getElementById('certNext');
+      let active = 1;
+      const count = items.length;
+
+      function update(index) {
+        if (index < 0) index = 0;
+        if (index >= count) index = count - 1;
+        active = index;
+        carousel.style.setProperty('--active-index', active);
+        items.forEach((item, i) => {
+          item.classList.remove('active', 'near', 'far');
+          const diff = Math.abs(i - active);
+          if (diff === 0) item.classList.add('active');
+          else if (diff === 1) item.classList.add('near');
+          else item.classList.add('far');
+        });
+        yearWraps.forEach((wrap, i) => {
+          const btn = wrap.querySelector('.cert-year');
+          wrap.classList.toggle('active', i === active);
+          btn.classList.toggle('active', i === active);
+        });
+        prevBtn.disabled = active === 0;
+        nextBtn.disabled = active === count - 1;
+      }
+
+      yearWraps.forEach((wrap, i) => wrap.addEventListener('click', () => update(i)));
+      prevBtn.addEventListener('click', () => update(active - 1));
+      nextBtn.addEventListener('click', () => update(active + 1));
+
+      update(active);
+    })();
+  </script>
+</body>
+</html>

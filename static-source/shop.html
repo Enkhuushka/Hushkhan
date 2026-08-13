@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дэлгүүр — HushKhan.mn</title>
+  <meta name="description" content="HushKhan онлайн дэлгүүр. Монголын хушны самар, самрын тос, бэлэг багц. Байгалийн гаралтай, хими бордоогүй.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shop/shop-shared.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <svg class="logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-3.5 4-5.5 8-5.5 12a5.5 5.5 0 0 0 11 0C17.5 10 15.5 6 12 2Z"/><path d="M12 6v12"/><path d="M8.5 10h7"/><path d="M8 14h8"/><path d="M9 18h6"/></svg>
+            HushKhan
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/shop">Бүтээгдэхүүн</a></li>
+                <li><a href="/about">Бидний тухай</a></li>
+                <li><a href="/sustainability">Тогтвортой хөгжил</a></li>
+                <li><a href="/partnership">Хамтын ажиллагаа</a></li>
+                <li><a href="/certificates.html">Чанарын баталгаа</a></li>
+                <li><a href="/news">Мэдээ</a></li>
+                <li><a href="/careers">Ажлын байр</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="lang-bar">
+                <a href="/" class="active">MN</a>
+                <a href="#">EN</a>
+                <a href="#">中文</a>
+                <a href="#">RU</a>
+                <a href="#">KR</a>
+            </div>
+            <button class="icon-btn cart-toggle" id="cartToggle" aria-label="Cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+            <button class="icon-btn menu-btn" aria-label="Menu" id="menuBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-drawer-header">
+        <h2>Таны сагс <span id="cartHeaderCount">(0)</span></h2>
+        <button class="cart-close" id="cartClose" aria-label="Хаах">&times;</button>
+    </div>
+    <div class="cart-drawer-body">
+        <div class="cart-upsell">
+            <p class="cart-upsell-title">Үнэгүй бэлэг аваарай</p>
+            <div class="cart-upsell-product">
+                <img src="/assets/products/oil.jpg" alt="Самрын тос жижиг">
+                <div>
+                    <h4>Самрын тос жижиг лонх</h4>
+                    <p>Үнэгүй <s>25,000₮</s></p>
+                </div>
+                <button class="btn-add-cart-sm" data-upsell="oil-small">Нэмэх</button>
+            </div>
+        </div>
+        <div class="cart-items" id="cartItems"><div class="cart-empty">Сагс хоосон байна.</div></div>
+        <div class="cart-upsell">
+            <p class="cart-upsell-title">Нууц бэлэг багц</p>
+            <div class="cart-upsell-product">
+                <img src="/assets/products/gift.jpg" alt="Нууц багц">
+                <div>
+                    <h4>HushKhan Mystery Bag</h4>
+                    <p>Зөвхөн 35,000₮ <s>50,000₮</s></p>
+                </div>
+                <button class="btn-add-cart-sm" data-upsell="mystery">Нэмэх</button>
+            </div>
+        </div>
+        <div class="cart-also-bought">
+            <p class="cart-upsell-title">Үүнтэй хамт авдаг</p>
+            <div class="also-bought-list">
+                <div class="also-bought-item"><img src="/assets/products/chocolate.jpg" alt="Самрын шоколад"><p>Самрын шоколад</p><button data-upsell="chocolate">Нэмэх</button></div>
+                <div class="also-bought-item"><img src="/assets/products/honey.jpg" alt="Балтай самар"><p>Зөгийн балтай самар</p><button data-upsell="honey">Нэмэх</button></div>
+                <div class="also-bought-item"><img src="/assets/products/raw.jpg" alt="Цэвэр самар"><p>Цэвэр самар</p><button data-upsell="raw">Нэмэх</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-drawer-footer">
+        <div class="cart-guarantee">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Мөнгө буцаах баталгаа
+        </div>
+        <button class="btn-checkout" id="checkoutBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            ТӨЛБӨР ТӨЛӨХ · <span id="cartTotal">0₮</span> <s id="cartOriginalTotal">0₮</s>
+        </button>
+    </div>
+</aside>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="/shop">Бүтээгдэхүүн</a>
+    <a href="/about">Бидний тухай</a>
+    <a href="/sustainability">Тогтвортой хөгжил</a>
+    <a href="/partnership">Хамтын ажиллагаа</a>
+        <a href="/certificates.html">Чанарын баталгаа</a>
+    <a href="/news">Мэдээ</a>
+    <a href="/careers">Ажлын байр</a>
+    <a href="/careers/contact">Холбоо барих</a>
+</div>
+
+<section class="shop-hero">
+    <div class="shop-hero-inner">
+      <div class="shop-hero-image">
+        <img src="/assets/hero-product.jpg" alt="HushKhan premium pine nut oil">
+      </div>
+      <div class="shop-hero-text">
+        <p class="shop-hero-eyebrow">Онцлох бүтээгдэхүүн</p>
+        <h1>Самрын тос — Premium</h1>
+        <p class="shop-hero-desc">Монголын тайгын хушны самраар гаргасан цэвэр тос. Арьс, үсний эрүүл мэнд, чийгшүүлэлт, гоо сайхны хэрэглээнд зориулсан.</p>
+        <a href="#products" class="btn btn-light">Бүгдийг үзэх</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-categories">
+    <div class="container">
+      <div class="shop-category-list">
+        <button class="shop-category active" data-filter="all">Бүгд</button>
+        <button class="shop-category" data-filter="nuts">Самар</button>
+        <button class="shop-category" data-filter="oil">Самрын тос</button>
+        <button class="shop-category" data-filter="gift">Бэлэг багц</button>
+        <button class="shop-category" data-filter="snacks">Амттан</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-section" id="products">
+    <div class="container">
+      <div class="shop-catalog-header reveal">
+        <div class="shop-catalog-title">
+          <h2>Бүх бүтээгдэхүүн</h2>
+          <p>Байгалийн гаралтай, чанартай хушны самрын бүтээгдэхүүн.</p>
+        </div>
+        <div class="shop-toolbar">
+          <div class="shop-count"><strong id="productCount">6</strong> бүтээгдэхүүн</div>
+          <div class="shop-sort">
+            <label for="sortSelect">Эрэмбэлэх:</label>
+            <select id="sortSelect">
+              <option value="popular">Хамгийн эрэлттэй</option>
+              <option value="price-asc">Үнэ: багаас их</option>
+              <option value="price-desc">Үнэ: ихээс бага</option>
+              <option value="name">Нэр</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="shop-grid" id="collectionsGrid">
+        <article class="shop-card" data-category="nuts" data-price="45000" data-name="Шарсан хушны самар" data-popular="1">
+          <div class="shop-card-image">
+            <a href="/shop/products/roasted" class="shop-card-img"><img src="/assets/products/roasted.jpg" alt="Шарсан хушны самар"></a>
+            <span class="shop-card-badge">Бестселлер</span>
+            <button class="shop-quickadd" type="button" data-id="roasted" data-title="Шарсан хушны самар" data-image="/assets/products/roasted.jpg" data-price="45000" data-original="52000" aria-label="Сагсанд нэмэх">+</button>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-rating">★★★★★ <span>4.9/5.0</span></div>
+            <h3 class="shop-card-title"><a href="/shop/products/roasted">Шарсан хушны самар</a></h3>
+            <p class="shop-card-tags">250г · Омега-3 · Vegan</p>
+            <div class="shop-card-footer"><a href="/shop/products/roasted" class="shop-card-price">45 000₮</a></div>
+          </div>
+        </article>
+
+        <article class="shop-card" data-category="nuts" data-price="52000" data-name="Цэвэр хушны самар" data-popular="2">
+          <div class="shop-card-image">
+            <a href="/shop/products/raw" class="shop-card-img"><img src="/assets/products/raw.jpg" alt="Цэвэр хушны самар"></a>
+            <span class="shop-card-badge">Байгалийн</span>
+            <button class="shop-quickadd" type="button" data-id="raw" data-title="Цэвэр хушны самар" data-image="/assets/products/raw.jpg" data-price="52000" data-original="60000" aria-label="Сагсанд нэмэх">+</button>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-rating">★★★★★ <span>4.8/5.0</span></div>
+            <h3 class="shop-card-title"><a href="/shop/products/raw">Цэвэр хушны самар</a></h3>
+            <p class="shop-card-tags">250г · Гараар хураасан · Vegan</p>
+            <div class="shop-card-footer"><a href="/shop/products/raw" class="shop-card-price">52 000₮</a></div>
+          </div>
+        </article>
+
+        <article class="shop-card" data-category="snacks" data-price="58500" data-name="Зөгийн балтай самар" data-popular="3">
+          <div class="shop-card-image">
+            <a href="/shop/products/honey" class="shop-card-img"><img src="/assets/products/honey.jpg" alt="Зөгийн балтай самар"></a>
+            <span class="shop-card-badge">Шинэ</span>
+            <button class="shop-quickadd" type="button" data-id="honey" data-title="Зөгийн балтай самар" data-image="/assets/products/honey.jpg" data-price="58500" data-original="68000" aria-label="Сагсанд нэмэх">+</button>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-rating">★★★★★ <span>4.7/5.0</span></div>
+            <h3 class="shop-card-title"><a href="/shop/products/honey">Зөгийн балтай самар</a></h3>
+            <p class="shop-card-tags">250г · Антиоксидант · Амттан</p>
+            <div class="shop-card-footer"><a href="/shop/products/honey" class="shop-card-price">58 500₮</a></div>
+          </div>
+        </article>
+
+        <article class="shop-card" data-category="oil" data-price="78000" data-name="Хушны самрын тос" data-popular="4">
+          <div class="shop-card-image">
+            <a href="/shop/products/oil" class="shop-card-img"><img src="/assets/products/oil.jpg" alt="Хушны самрын тос"></a>
+            <span class="shop-card-badge">Premium</span>
+            <button class="shop-quickadd" type="button" data-id="oil" data-title="Хушны самрын тос" data-image="/assets/products/oil.jpg" data-price="78000" data-original="90000" aria-label="Сагсанд нэмэх">+</button>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-rating">★★★★★ <span>4.9/5.0</span></div>
+            <h3 class="shop-card-title"><a href="/shop/products/oil">Хушны самрын тос</a></h3>
+            <p class="shop-card-tags">100мл · Гоо сайхан · Витамин Е</p>
+            <div class="shop-card-footer"><a href="/shop/products/oil" class="shop-card-price">78 000₮</a></div>
+          </div>
+        </article>
+
+        <article class="shop-card" data-category="gift" data-price="158000" data-name="HushKhan бэлэг багц" data-popular="5">
+          <div class="shop-card-image">
+            <a href="/shop/products/gift" class="shop-card-img"><img src="/assets/products/gift.jpg" alt="HushKhan бэлэг багц"></a>
+            <span class="shop-card-badge">Бэлэг</span>
+            <button class="shop-quickadd" type="button" data-id="gift" data-title="HushKhan бэлэг багц" data-image="/assets/products/gift.jpg" data-price="158000" data-original="185000" aria-label="Сагсанд нэмэх">+</button>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-rating">★★★★★ <span>5.0/5.0</span></div>
+            <h3 class="shop-card-title"><a href="/shop/products/gift">HushKhan бэлэг багц</a></h3>
+            <p class="shop-card-tags">Бэлэг · Хүргэлт</p>
+            <div class="shop-card-footer"><a href="/shop/products/gift" class="shop-card-price">158 000₮</a></div>
+          </div>
+        </article>
+
+        <article class="shop-card" data-category="snacks" data-price="43200" data-name="Самрын шоколад" data-popular="6">
+          <div class="shop-card-image">
+            <a href="/shop/products/chocolate" class="shop-card-img"><img src="/assets/products/chocolate.jpg" alt="Самрын шоколад"></a>
+            <span class="shop-card-badge">Амттан</span>
+            <button class="shop-quickadd" type="button" data-id="chocolate" data-title="Самрын шоколад" data-image="/assets/products/chocolate.jpg" data-price="43200" data-original="50000" aria-label="Сагсанд нэмэх">+</button>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-rating">★★★★★ <span>4.6/5.0</span></div>
+            <h3 class="shop-card-title"><a href="/shop/products/chocolate">Самрын шоколад</a></h3>
+            <p class="shop-card-tags">Какао · Энерги</p>
+            <div class="shop-card-footer"><a href="/shop/products/chocolate" class="shop-card-price">43 200₮</a></div>
+          </div>
+        </article>
+
+        <article class="shop-editorial" data-category="gift">
+          <div class="shop-editorial-inner">
+            <span class="shop-editorial-tag">Gift</span>
+            <h3 class="shop-editorial-title">The Gift Collection</h3>
+            <p class="shop-editorial-desc">HushKhan бэлэг багц, mystery bag, monthly box. Хайртай хүндээ Монголын тайгаас.</p>
+            <a href="/shop/products/gift" class="shop-editorial-link">Бэлэг багц үзэх</a>
+          </div>
+          <div class="shop-editorial-image">
+            <img src="/assets/products/gift.jpg" alt="The Gift Collection">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-promo">
+    <div class="shop-promo-bg"><img src="/assets/about-forest.jpg" alt="Forest"></div>
+    <div class="shop-promo-overlay"></div>
+    <div class="shop-promo-inner">
+      <div class="shop-promo-text reveal">
+        <p class="shop-hero-eyebrow">Бэлэг</p>
+        <h2 class="ap-heading">Хайртай хүндээ<br>Монголын тайгаас</h2>
+        <p class="shop-hero-desc">HushKhan бэлэг багц нь бүтээгдэхүүнийг өвөрмөц савлагаатайгаар бэлэглэхэд тохиромжтой.</p>
+        <a href="/shop/products/gift" class="btn btn-light">Бэлэг багц үзэх</a>
+      </div>
+      <div class="shop-promo-image reveal">
+        <img src="/assets/products/gift.jpg" alt="HushKhan gift set">
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-locations-hero">
+    <div class="container">
+      <div class="shop-locations-hero-grid">
+        <div class="shop-locations-hero-text reveal">
+          <p class="shop-hero-eyebrow">ХААНААС АВАХ ВЭ</p>
+          <h2 class="ap-heading">ДЭЛГҮҮР, ХҮРГЭЛТ, <br>ОЛОН УЛС</h2>
+          <p class="shop-hero-desc">Улаанбаатарын 40+ дэлгүүр, онлайн захиалга, хөдөө орон нутаг руу хүргэлт.</p>
+          <a href="#storeLocations" class="btn btn-outline">БАЙРШИЛ ХАЙХ</a>
+        </div>
+        <div class="shop-locations-map reveal">
+          <img src="/assets/partnership-world.jpg" alt="Дэлхийн газрын зураг">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-locations-list" id="storeLocations">
+    <div class="container">
+      <div class="shop-locations-header reveal">
+        <div>
+          <p class="shop-hero-eyebrow">Борлуулалтын цэгүүд</p>
+          <h2 class="ap-heading">Байршил хайх</h2>
+        </div>
+        <div class="shop-locations-search">
+          <input type="text" id="storeSearch" placeholder="Дэлгүүрийн нэр, хаяг" aria-label="Дэлгүүр хайх">
+          <select id="storeCity" aria-label="Хот сонгох">
+            <option value="all">Бүх хот</option>
+            <option value="Улаанбаатар">Улаанбаатар</option>
+            <option value="Эрдэнэт">Эрдэнэт</option>
+            <option value="Дархан">Дархан</option>
+          </select>
+        </div>
+      </div>
+      <div class="shop-locations-cards" id="storeList"></div>
+    </div>
+  </section>
+
+  <footer id="footerV2" class="footer footer-v2">
+    <div class="footer-v2-inner">
+      <div class="footer-v2-grid">
+        <div class="footer-v2-col"><h4>Дэлгүүр</h4><a href="/shop">Бүтээгдэхүүн</a><a href="/shop/products/roasted">Шарсан самар</a><a href="/shop/products/raw">Цэвэр самар</a><a href="/shop/products/honey">Балтай самар</a><a href="/shop/products/oil">Самрын тос</a></div>
+        <div class="footer-v2-col"><h4>Компани</h4><a href="/about">Бидний тухай</a><a href="/about/timeline">Түүх</a><a href="/sustainability">Тогтвортой хөгжил</a><a href="/careers">Ажлын байр</a></div>
+        <div class="footer-v2-col"><h4>Тусламж</h4><a href="/shop/locations">Хүргэлт / Байршил</a><a href="#">Буцаалт</a><a href="#">Нууцлал</a><a href="#">Үйлчилгээний нөхцөл</a></div>
+        <div class="footer-v2-col footer-v2-sub">
+          <h4>Мэдээлэл авах</h4>
+          <p>Шинэ бүтээгдэхүүн, хямдралын мэдээлэл аваарай.</p>
+          <form class="footer-v2-form" onsubmit="event.preventDefault(); this.reset(); alert('Бүртгэл амжилттай!');">
+            <input type="email" placeholder="И-мэйл хаяг" required aria-label="И-мэйл хаяг">
+            <button type="submit">Бүртгүүлэх</button>
+          </form>
+          <label class="footer-v2-check"><input type="checkbox"><span>Би HushKhan-аас мэдээлэл авахыг зөвшөөрч байна.</span></label>
+        </div>
+        <div class="footer-v2-col"><h4>Үйлчилгээ</h4><a href="/partnership">Бөөний худалдаа</a><a href="/partnership">Хамтын ажиллагаа</a><a href="/careers">Ажлын байр</a></div>
+        <div class="footer-v2-col"><h4>Холбоо барих</h4><a href="/careers/contact">Холбогдох</a><a href="#">Түгээмэл асуулт</a><a href="#">Тусламж</a></div>
+        <div class="footer-v2-col"><h4>Сошиал</h4><a href="#" aria-label="Instagram">Instagram</a><a href="#" aria-label="Facebook">Facebook</a><a href="#" aria-label="TikTok">TikTok</a></div>
+        <div class="footer-v2-col">
+          <h4>Хүлээн авах</h4>
+          <div class="footer-v2-pay"><span class="pay-chip">VISA</span><span class="pay-chip">Mastercard</span><span class="pay-chip">Amex</span><span class="pay-chip">PayPal</span></div>
+        </div>
+      </div>
+      <div class="footer-v2-brand"><span>HushKhan</span><span class="brand-sep">|</span><span>2018</span></div>
+      <div class="footer-v2-bottom">
+        <div class="footer-v2-bottom-left">Exclusive Offers</div>
+        <div class="footer-v2-bottom-center">© 2026 HUSHKHAN MONGOLIA</div>
+        <div class="footer-v2-bottom-right">HushKhan is a Mongolian premium pine-nut brand.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    var grid = document.getElementById('collectionsGrid');
+    if (!grid) return;
+    var countEl = document.getElementById('productCount');
+    var allCards = Array.from(grid.children);
+    var productCards = allCards.filter(function(c) { return c.classList.contains('shop-card'); });
+    function updateCount() { var visible = productCards.filter(function(c) { return c.style.display !== 'none'; }); if (countEl) countEl.textContent = visible.length; }
+    document.querySelectorAll('.shop-category').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.shop-category').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var filter = btn.dataset.filter;
+        productCards.forEach(function(card) { card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none'; });
+        updateCount();
+      });
+    });
+    var sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function() {
+        var sort = sortSelect.value;
+        var sorted = productCards.slice();
+        sorted.sort(function(a, b) {
+          if (sort === 'price-asc') return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+          if (sort === 'price-desc') return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+          if (sort === 'name') return a.dataset.name.localeCompare(b.dataset.name);
+          return parseInt(a.dataset.popular) - parseInt(b.dataset.popular);
+        });
+        var pIndex = 0;
+        allCards.forEach(function(original) {
+          if (original.classList.contains('shop-editorial')) grid.appendChild(original);
+          else grid.appendChild(sorted[pIndex++]);
+        });
+      });
+    }
+    updateCount();
+  })();
+  </script>
+
+  <script>
+  (function() {
+    var searchInput = document.getElementById('storeSearch');
+    var citySelect = document.getElementById('storeCity');
+    var storeList = document.getElementById('storeList');
+    if (!searchInput || !citySelect || !storeList) return;
+    var stores = [
+      { id: 1, name: 'Миний дэлгүүр', city: 'Улаанбаатар', address: 'СБД, Энхтайвны өргөн чөлөө 12', hours: '09:00 - 21:00', tags: ['Онцлох'] },
+      { id: 2, name: 'Good Price', city: 'Улаанбаатар', address: 'Хан-Уул дүүрэг, 15-р хороо', hours: '08:00 - 22:00', tags: ['Супермаркет'] },
+      { id: 3, name: 'Organic Shop', city: 'Улаанбаатар', address: 'Баянзүрх дүүрэг, 4-р хороо', hours: '10:00 - 20:00', tags: ['Органик'] },
+      { id: 4, name: 'Номин Холдинг', city: 'Улаанбаатар', address: 'Чингэлтэй дүүрэг, Их Монгол гудамж', hours: '09:00 - 22:00', tags: ['Сүлжээ дэлгүүр'] },
+      { id: 5, name: 'Мэркьюрийн зах', city: 'Улаанбаатар', address: 'Баянгол дүүрэг, 3-р хороолол', hours: '06:00 - 21:00', tags: ['Хүнсний зах'] },
+      { id: 6, name: 'E-Mart Эрдэнэт', city: 'Эрдэнэт', address: 'Баян-Өндөр сум, төв талбай', hours: '09:00 - 20:00', tags: ['Супермаркет'] },
+      { id: 7, name: 'Дархан Март', city: 'Дархан', address: 'Дархан сум, 3-р бүс', hours: '08:30 - 21:00', tags: ['Дэлгүүр'] }
+    ];
+    function escapeHtml(text) { var div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+    function render() {
+      var q = searchInput.value.trim().toLowerCase();
+      var city = citySelect.value;
+      var filtered = stores.filter(function(s) { var cityMatch = city === 'all' || s.city === city; var textMatch = !q || s.name.toLowerCase().includes(q) || s.address.toLowerCase().includes(q) || s.tags.some(function(t) { return t.toLowerCase().includes(q); }); return cityMatch && textMatch; });
+      if (!filtered.length) { storeList.innerHTML = '<div class="shop-location-empty">Таны хайлтад тохирох дэлгүүр олдсонгүй.</div>'; return; }
+      storeList.innerHTML = filtered.map(function(s) { return '<div class="shop-location-card"><div class="shop-location-name">' + escapeHtml(s.name) + '</div><div class="shop-location-meta">' + escapeHtml(s.address) + '<br>' + s.hours + '</div><div class="shop-location-tags">' + s.tags.map(function(t) { return '<span class="shop-location-tag">' + escapeHtml(t) + '</span>'; }).join('') + '</div></div>'; }).join('');
+    }
+    searchInput.addEventListener('input', render); citySelect.addEventListener('change', render); render();
+  })();
+  </script>
+
+  <script src="/shop/shop-shared.js"></script>
+</body>
+</html>
